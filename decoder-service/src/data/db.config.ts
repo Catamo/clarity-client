@@ -1,6 +1,4 @@
 import { Db, MongoClient } from "mongodb";
-import getEventEmitter from "../utils/getEventEmitter";
-import { createSessionsView } from "./sessions.view";
 
 const DATABASE_NAME = "clarity_in_house";
 
@@ -9,11 +7,6 @@ class DatabaseConfig {
 
   constructor() {
     this.client = null;
-    getEventEmitter().once("onRecordingsFirstInsert", () => {
-      if (this.client) {
-        createSessionsView(this.client.db(DATABASE_NAME));
-      }
-    });
   }
 
   connect = async (): Promise<Db> => {
