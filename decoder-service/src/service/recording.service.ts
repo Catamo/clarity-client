@@ -14,14 +14,14 @@ class RecordingsService {
   }
 
   async getAllRecordings() {
-    let data = {};
+    let data = [];
     try {
       const database = await dbConfig.connect();
 
       const collection = database.collection("recordings");
-      data = await collection.find({});
-    } catch (err) {
-      console.error("getAllRecordings", err);
+      const results = await collection.find({});
+
+      data = await results.toArray();
     } finally {
       dbConfig.disconnect();
     }

@@ -2,11 +2,12 @@ import dbConfig from "../data/db.config";
 
 class SessionsService {
   async getAllSessions() {
-    let data = {};
+    let data = [];
     try {
       const database = await dbConfig.connect();
       const collection = database.collection("sessions");
-      data = await collection.find({});
+      const results = await collection.find({});
+      data = await results.toArray();
     } finally {
       dbConfig.disconnect();
     }
