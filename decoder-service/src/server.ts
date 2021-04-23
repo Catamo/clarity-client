@@ -33,7 +33,7 @@ app.get("/tag/:projectId", (req: any, res: any) => {
   );
 });
 
-app.post("/collect", express.text(), (req: any, res: any, next: () => void) => {
+app.post("/collect", express.text(), (req: any, res: any) => {
   const decoded = decode(req.body);
 
   const service = new RecordingsService();
@@ -42,18 +42,18 @@ app.post("/collect", express.text(), (req: any, res: any, next: () => void) => {
   res.end("Recording saved");
 });
 
-app.get("/recordings", (req: any, res: any) => {
+app.get("/recordings", async (req: any, res: any) => {
   const service = new RecordingsService();
 
   res.type("json");
-  res.send(service.getAllRecordings());
+  res.send(await service.getAllRecordings());
 });
 
-app.get("/sessions", (req: any, res: any) => {
+app.get("/sessions", async (req: any, res: any) => {
   const service = new SessionsService();
 
   res.type("json");
-  res.send(service.getAllSessions());
+  res.send(await service.getAllSessions());
 });
 
 app.listen(port, () => {
