@@ -12,21 +12,6 @@ class RecordingsService {
     }
     return data;
   }
-
-  async getAllRecordings() {
-    let data = [];
-    try {
-      const database = await dbConfig.connect();
-
-      const collection = database.collection("recordings");
-      const results = await collection.find({});
-
-      data = await results.toArray();
-    } finally {
-      dbConfig.disconnect();
-    }
-    return data;
-  }
 }
 
 export default RecordingsService;

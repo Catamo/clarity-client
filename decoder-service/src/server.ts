@@ -42,13 +42,6 @@ app.post("/collect", express.text(), (req: any, res: any) => {
   res.end("Recording saved");
 });
 
-app.get("/recordings", async (req: any, res: any) => {
-  const service = new RecordingsService();
-
-  res.type("json");
-  res.send(await service.getAllRecordings());
-});
-
 app.get("/sessions", async (req: any, res: any) => {
   const service = new SessionsService();
 
