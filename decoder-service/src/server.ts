@@ -49,6 +49,14 @@ app.get("/sessions", async (req: any, res: any) => {
   res.send(await service.getAllSessions());
 });
 
+app.get("/session/:id", async (req: any, res: any) => {
+  const service = new SessionsService();
+  const sessionId = req.params.id;
+
+  res.type("json");
+  res.send(await service.getSession(sessionId));
+});
+
 app.listen(port, () => {
   console.log(`App is listening on port ${port}!`);
 });
